@@ -65,7 +65,7 @@ class recuperar1():
         company_label.pack(side="left", padx=10)
         
         # Botón de regresar
-        imgRegresar = tk.PhotoImage(file='C://Users/Usuario/Documents/software v1/images/atras.png')
+        imgRegresar = tk.PhotoImage(file='C://Users/Usuario/Documents/inventario/software v1/images/atras.png')
         self.btnRegresar = tk.Button(top_frame, image=imgRegresar, command=self.regresar, bg="#004A2F", borderwidth=0)
         self.btnRegresar.pack(side="right", padx=5)
         
@@ -74,7 +74,7 @@ class recuperar1():
         center_frame.pack(expand=True)
         
         # Icono de usuario
-        user_icon = tk.PhotoImage(file="C://Users/Usuario/Documents/software v1/images/restablecer-la-contrasena (1).png")
+        user_icon = tk.PhotoImage(file="C://Users/Usuario/Documents/inventario/software v1/images/restablecer-la-contrasena (1).png")
         user_icon_label = tk.Label(center_frame, image=user_icon, bg="#EAF6F6")
         user_icon_label.pack(pady=10)
         
@@ -147,7 +147,7 @@ class recuperar2():
             company_label.pack(side="left", padx=10)
             
             # Botón de regresar
-            imgRegresar = tk.PhotoImage(file='C://Users/Usuario/Documents/software v1/images/atras.png')
+            imgRegresar = tk.PhotoImage(file='C://Users/Usuario/Documents/inventario/software v1/images/atras.png')
             self.btnRegresar = tk.Button(top_frame, image=imgRegresar, command=self.regresar, bg="#004A2F", borderwidth=0)
             self.btnRegresar.pack(side="right", padx=5)
             
@@ -156,7 +156,7 @@ class recuperar2():
             center_frame.pack(expand=True)
             
             # Icono de usuario
-            user_icon = tk.PhotoImage(file="C://Users/Usuario/Documents/software v1/images/restablecer-la-contrasena (1).png")
+            user_icon = tk.PhotoImage(file="C://Users/Usuario/Documents/inventario/software v1/images/restablecer-la-contrasena (1).png")
             user_icon_label = tk.Label(center_frame, image=user_icon, bg="#EAF6F6")
             user_icon_label.pack(pady=10)
             
@@ -223,7 +223,7 @@ class recuperar3():
         company_label.pack(side="left", padx=10)
         
         # Botón de regresar
-        imgRegresar = tk.PhotoImage(file='C://Users/Usuario/Documents/software v1/images/atras.png')
+        imgRegresar = tk.PhotoImage(file='C://Users/Usuario/Documents/inventario/software v1/images/atras.png')
         self.btnRegresar = tk.Button(top_frame, image=imgRegresar, command=self.regresar, bg="#004A2F", borderwidth=0)
         self.btnRegresar.pack(side="right", padx=5)
         
@@ -232,7 +232,7 @@ class recuperar3():
         center_frame.pack(expand=True)
         
         # Icono de usuario
-        user_icon = tk.PhotoImage(file="C://Users/Usuario/Documents/software v1/images/restablecer-la-contrasena (1).png")
+        user_icon = tk.PhotoImage(file="C://Users/Usuario/Documents/inventario/software v1/images/restablecer-la-contrasena (1).png")
         user_icon_label = tk.Label(center_frame, image=user_icon, bg="#EAF6F6")
         user_icon_label.pack(pady=10)
         

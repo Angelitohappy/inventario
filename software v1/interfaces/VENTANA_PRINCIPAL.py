@@ -84,7 +84,7 @@ class admin():
         label1.config(fg ="black", bg = "lavender", font = ("Arial", 14))
         label1.place(x = 40 , y = 240)
 
-        imgusuario = tk.PhotoImage(file = "C://Users/Usuario/Documents/software v1/images/imagenes-de-usuario.png")
+        imgusuario = tk.PhotoImage(file = "C://Users/Usuario/Documents/inventario/software v1/images/imagenes-de-usuario.png")
         label = tk.Label(image = imgusuario)
         label.place(x = 90, y = 80)        
 

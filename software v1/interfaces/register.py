@@ -133,12 +133,12 @@ class registro():
         company_label.pack(side="left", padx=10)
         
         # Botón de salir
-        imgRegresar = tk.PhotoImage(file='C://Users/Usuario/Documents/software v1/images/atras.png')
+        imgRegresar = tk.PhotoImage(file='C://Users/Usuario/Documents/inventario/software v1/images/atras.png')
         self.btnRegresar = tk.Button(top_frame, image=imgRegresar, command=self.regresar, bg="#004A2F", borderwidth=0)
         self.btnRegresar.pack(side="right", padx=5)
         
         # Botón de minimizar
-        imgsMinimizar = tk.PhotoImage(file='C://Users/Usuario/Documents/software v1/images/minimizar.png')
+        imgsMinimizar = tk.PhotoImage(file='C://Users/Usuario/Documents/inventario/software v1/images/minimizar.png')
         self.Minimizar = tk.Button(top_frame, image=imgsMinimizar, command=self.minimize_window, bg="#004A2F", borderwidth=0)
         self.Minimizar.pack(side="right", padx=5)
         
@@ -219,7 +219,7 @@ class registro():
         take_photo_button = tk.Button(self.pantalla1, text="Tomar foto", bg="#004A2F", fg="white", font=button_font, command=self.take_photo)
         take_photo_button.place(x=555, y=270)
 
-        camera_icon = PhotoImage(file='C://Users/Usuario/Documents/software v1/images/imagenes-de-usuario.png')  # Ruta al icono de la cámara
+        camera_icon = PhotoImage(file='C://Users/Usuario/Documents/inventario/software v1/images/imagenes-de-usuario.png')  # Ruta al icono de la cámara
         marco = Label(photo_frame, image=camera_icon, bg=bg_color)
         marco.pack()
 

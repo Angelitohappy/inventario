@@ -103,7 +103,7 @@ class registrar_producto():
         entrada_ancho.config(fg = "gray", bg = "white", font = ("Arial", 12), width = 10)
         entrada_ancho.place(x = 75,y = 360)
 
-        imgneumatico = Image.open('C://Users/Usuario/Documents/software v1/images/imagen.jpeg')
+        imgneumatico = Image.open('C://Users/Usuario/Documents/inventario/software v1/images/imagen.jpeg')
         imagen_redimensionada = imgneumatico.resize((400,410))
         imagen_tk = ImageTk.PhotoImage(imagen_redimensionada)
 

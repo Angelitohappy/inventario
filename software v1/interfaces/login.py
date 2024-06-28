@@ -84,7 +84,7 @@ class Acceso:
         company_label.pack(side="left", padx=10)
         
         # Botón de salir
-        imgsSalir = tk.PhotoImage(file='C://Users/Usuario/Documents/Software/icons/cerrar-sesion.png')
+        imgsSalir = tk.PhotoImage(file='C://Users/Usuario/Documents/inventario/software v1/images/cerrar-sesion.png')
         self.salir = tk.Button(top_frame, image=imgsSalir, command=self.exit, bg="#004A2F", borderwidth=0)
         self.salir.pack(side="right", padx=10)
         
@@ -97,7 +97,7 @@ class Acceso:
         title_label.pack(pady=20)
         
         # Icono de usuario
-        user_icon = tk.PhotoImage(file="C://Users/Usuario/Documents/software v1/images/usuario.png")
+        user_icon = tk.PhotoImage(file="C://Users/Usuario/Documents/inventario/software v1/images/usuario.png")
         user_icon_label = tk.Label(center_frame, image=user_icon, bg="#EAF6F6")
         user_icon_label.pack(pady=10)
         
@@ -127,7 +127,7 @@ class Acceso:
         
         
         # Botón de rostro
-        imgBtnface = tk.PhotoImage(file='C://Users/Usuario/Documents/software v1/images/reconocimiento-facial.png')
+        imgBtnface = tk.PhotoImage(file='C://Users/Usuario/Documents/inventario/software v1/images/reconocimiento-facial.png')
         self.BtnRostro = tk.Button(center_frame, image=imgBtnface, bg="#004A2F", borderwidth=0,command=self.inicio_facial)
         self.BtnRostro.pack(side="right",pady=20)
         
