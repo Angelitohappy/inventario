@@ -12,8 +12,8 @@ class DatabaseManager:
         )
         self.cursor = self.conn.cursor()
 
-    def insert_data_usuario(self,id,name,user,email,phone,password,address,face):
-        query = "INSERT INTO usuario(cedula,nombre,username,tipo_usuario,correo,telefono,direccion,clave,face) VALUES ('"+id+"','"+name+"','"+user+"','Usuario','"+email+"','"+phone+"','"+address+"','"+password+"','"+face+"')"
+    def insert_data_producto(self,marca,tipo_neumatico,anchura,perfil,radio,indice_carga,indice_velocidad,cantidad):
+        query = "INSERT INTO producto(marca,tipo_neumatico,anchura,perfil,radio,indice_carga,indice_velocidad,cantidad) VALUES ('"+marca+"','"+tipo_neumatico+"','"+anchura+"','"+perfil+"','"+radio+"','"+indice_carga+"','"+indice_velocidad+"','"+cantidad+"')"
         self.cursor.execute(query)
         self.conn.commit()
         
