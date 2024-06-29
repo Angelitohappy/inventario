@@ -59,10 +59,17 @@ class registrar_producto():
             anchor="w"
         )
         boton = ttk.Button(self.ventana, text = "Enviar datos", style = "BotonEnviar.TButton")
-        boton.place(x = 172, y = 483)
+        boton.place(x = 650, y = 500)
+        
+        label = tk.Label(self.ventana, text = "Almacen")
+        label.config(bg = "white smoke", font = ("Arial", 12))
+        label.place(x = 75 , y = 490)
 
-        # Esta linea crea la etiqueta donde se va a introducir el nombre del producto 
-
+        self.Almacen=ttk.Combobox(self.ventana,width=10, height=5 ,values=['prueba'], state="readonly", font = ("Arial", 12))
+        self.Almacen.current(0)
+        self.Almacen.place(x = 160, y = 490)
+        
+        
         label1 = tk.Label(self.ventana, text = "Marca")
         label1.config(bg = "white smoke", font = ("Arial", 12))
         label1.place(x = 75 , y = 75)
