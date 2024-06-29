@@ -8,9 +8,9 @@ from util.generic import centrar_ventana
 class admin():
     
     def toArticulo(self):
-        from interfaces.VENTANA_PRODUCTOS import add_item
+        from interfaces.VENTANA_PRODUCTOS import verProducto
         self.ventana.destroy()
-        add_item()
+        verProducto()
     
     def toAlmacen(self):
         from interfaces.VENTANA_ALMACENES import almacenx

@@ -22,6 +22,11 @@ class DatabaseManager:
         self.cursor.execute(query)
         self.conn.commit()
         
+    def read_data_producto(self):
+        query = "SELECT marca,tipo_neumatico,anchura,perfil,radio,indice_carga,indice_velocidad,cantidad FROM producto"
+        self.cursor.execute(query)
+        return self.cursor.fetchone()
+        
     def read_data_user(self, username, password):
         query = "SELECT * FROM usuario WHERE username = '"+username+"' AND clave = '"+password+"'"
         self.cursor.execute(query)

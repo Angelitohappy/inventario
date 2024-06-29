@@ -10,6 +10,7 @@ class registrar_producto():
     
     
     def insert_data(self):
+        codigo = ''
         marca = self.entrada_marca.get()
         tipo_neumatico = self.entrada_tipo.get()
         anchura = self.entrada_ancho.get()
@@ -58,6 +59,7 @@ class registrar_producto():
             font=("Arial", 12),
             anchor="w"
         )
+        
         boton = ttk.Button(self.ventana, text = "Enviar datos", style = "BotonEnviar.TButton")
         boton.place(x = 650, y = 500)
         
