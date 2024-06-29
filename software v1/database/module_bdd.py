@@ -27,6 +27,16 @@ class DatabaseManager:
         self.cursor.execute(query)
         return self.cursor.fetchone()
     
+    def read_data_Almacen(self):
+        query = "SELECT nombre_almacen FROM almacen"
+        self.cursor.execute(query)
+        return self.cursor.fetchone()
+    
+    def read_data_Almacen(self, almacen):
+        query = "SELECT idAlmacen FROM almacen WHERE nombre_almacen = '"+almacen+"'"
+        self.cursor.execute(query)
+        return self.cursor.fetchone()
+    
     def read_data_email(self, username):
         query = "SELECT correo FROM usuario WHERE username = '"+username+"'"
         self.cursor.execute(query)
