@@ -17,8 +17,13 @@ class DatabaseManager:
         self.cursor.execute(query)
         self.conn.commit()
         
+    def insert_data_alamcen(self,nombre,ubicacion,nro):
+        query = "INSERT INTO almacen(nombre_almacen,ubicacion,nro_almacen) VALUES ('"+nombre+"','"+ubicacion+"','"+nro+"')"
+        self.cursor.execute(query)
+        self.conn.commit()
+        
     def insert_data_usuario(self,id,name,user,email,phone,password,address,face):
-        query = "INSERT INTO producto(cedula,nombre,username,tipo_usuario,correo,telefono,direccion,clave,face) VALUES ('"+id+"','"+name+"','"+user+"','Usuario','"+email+"','"+phone+"','"+address+"','"+password+"','"+face+"')"
+        query = "INSERT INTO usuario(cedula,nombre,username,tipo_usuario,correo,telefono,direccion,clave,face) VALUES ('"+id+"','"+name+"','"+user+"','Usuario','"+email+"','"+phone+"','"+address+"','"+password+"','"+face+"')"
         self.cursor.execute(query)
         self.conn.commit()
         
@@ -32,12 +37,12 @@ class DatabaseManager:
         self.cursor.execute(query)
         return self.cursor.fetchone()
     
-    def read_data_Almacen(self):
+    def read_data_nombreAlmacen(self):
         query = "SELECT nombre_almacen FROM almacen"
         self.cursor.execute(query)
         return self.cursor.fetchone()
     
-    def read_data_Almacen(self, almacen):
+    def read_data_idAlmacen(self, almacen):
         query = "SELECT idAlmacen FROM almacen WHERE nombre_almacen = '"+almacen+"'"
         self.cursor.execute(query)
         return self.cursor.fetchone()
