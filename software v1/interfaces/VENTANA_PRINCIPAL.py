@@ -7,19 +7,25 @@ from util.generic import centrar_ventana
 
 class admin():
     
+    def regresar(self):
+        from interfaces.login import Acceso
+        self.ventana.destroy()
+        Acceso()
+    
     def toArticulo(self):
         from interfaces.VENTANA_PRODUCTOS import verProducto
         self.ventana.destroy()
         verProducto()
     
     def toAlmacen(self):
-        from interfaces.VENTANA_ALMACENES import almacenx
+        from interfaces.VENTANA_ALMACENES import verAlmacen
         self.ventana.destroy()
-        almacenx()
+        verAlmacen()
         
     def __init__(self): 
         self.ventana = tk.Tk()
         self.ventana.title("Registro de producto")
+        self.ventana.overrideredirect(True)
         self.ventana.geometry("600x400")
         self.ventana.resizable (0,0)
         self.ventana.configure(bg = "PaleGreen3")
@@ -39,7 +45,12 @@ class admin():
 
         frame_superior = tk.Frame(self.ventana)
         frame_superior.configure(width = 800, height = 50, bg = "palegreen4", bd = 5)
-        frame_superior.place(x = 0, y = 0)
+        frame_superior.pack(fill="x")
+        
+        # Botón de salir
+        imgsSalir = tk.PhotoImage(file='C://Users/Usuario/Documents/inventario/software v1/images/atras.png')
+        self.salir = tk.Button(frame_superior, image=imgsSalir, command=self.regresar, bg="palegreen4", borderwidth=0)
+        self.salir.pack(side="right", padx=10)
 
         boton_cerrar = tk.Button(self.ventana, text = "Ver articulos", command=self.toArticulo)
         boton_cerrar.config(width=18, fg = "white", bg = "medium sea green", font = ("Arial", 18), relief="groove")

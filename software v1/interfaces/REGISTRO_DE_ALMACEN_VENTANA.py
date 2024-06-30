@@ -5,6 +5,11 @@ from mysql.connector import Error
 
 class almacen():
     
+    def regresar(self):
+        from interfaces.VENTANA_ALMACENES import verAlmacen
+        self.ventana.destroy()
+        verAlmacen()
+    
     def insert_alamcen(self):
         nombre=self.entrada_almacen.get()
         ubicacion=self.entrada_ubicacion.get()
@@ -21,22 +26,31 @@ class almacen():
         # Creacion y diseño de la self.ventana principal
         self.ventana = tk.Tk()
         self.ventana.title("Registro de almacen")
+        self.ventana.overrideredirect(True)
         self.ventana.geometry("600x400")
         self.ventana.resizable (0,0)
         self.ventana.configure(bg = "white smoke")
         centrar_ventana(self.ventana,600,400)
-
-        # Titulo de la pagina
-
-        label1 = tk.Label(self.ventana, text = "REGISTRO DE ALMACEN")
-        label1.config(bg = "white smoke", font = ("Arial", 16, "bold"))
-        label1.place(x = 200 , y = 15)
+        
+        frame_superior = tk.Frame(self.ventana)
+        frame_superior.configure(width = 800, height = 50, bg = "palegreen4", bd = 5)
+        frame_superior.pack(fill="x")
+        
+        label1 = tk.Label(frame_superior, text = "REGISTRO DE ALMACEN")
+        label1.config(bg = "palegreen4", font = ("Arial", 8, "bold"))
+        label1.place(x = 0 , y = 0)
 
         # Label que funcionará como el fondo donde estarán ubicadas las etiquetas 
 
         frame1 = tk.Frame(self.ventana)
         frame1.configure(width = 550, height = 315, bg = "PaleGreen3", bd = 5)
         frame1.place(x = 25 , y = 50)
+        
+        
+        # Botón de salir
+        imgsSalir = tk.PhotoImage(file='C://Users/Usuario/Documents/inventario/software v1/images/atras.png')
+        self.salir = tk.Button(frame_superior, image=imgsSalir, command=self.regresar, bg="palegreen4", borderwidth=0)
+        self.salir.pack(side="right", padx=10)
 
         frame2 = tk.Frame(self.ventana)
         frame2.configure(width = 290, height = 245, bg = "white smoke", bd = 5)

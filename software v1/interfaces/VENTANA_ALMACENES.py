@@ -6,20 +6,12 @@ from mysql.connector import Error
 from util.generic import centrar_ventana
 # Creacion y diseño de la self.ventana principal
 
-
-def formatear_lineas(lineas):
-    # Obtener la longitud máxima de cada campo
-    almacen_max_len = max(len(linea[0]) for linea in lineas)
-    # Crear una cadena de formato para ajustar el ancho de los campos de texto
-    formato = "{:<{almacen}} "
-
-    # Crear una lista con las líneas formateadas
-    lineas_formateadas = [formato.format(linea[0],
-                                        almacen=almacen_max_len) for linea in lineas]
-
-    return lineas_formateadas
-
-class almacenx():
+class verAlmacen():
+    
+    def toPrincipal(self):
+        from interfaces.VENTANA_PRINCIPAL import admin
+        self.ventana.destroy()
+        admin()
     
     def toAgregar(self):
         from interfaces.REGISTRO_DE_ALMACEN_VENTANA import almacen
@@ -30,7 +22,7 @@ class almacenx():
         try:
             from database.module_bdd import DatabaseManager
             db = DatabaseManager()
-            almacen = db.read_data_nombreAlmacen()    
+            almacen = db.read_data_Almacen()    
             db.close_connection()
         except Error as e:
             messagebox.showerror(title="Error de conexión", message=f"No se pudo conectar a la base de idp: {e}")
@@ -41,15 +33,20 @@ class almacenx():
         self.ventana.title("Registro de producto")
         self.ventana.geometry("600x400")
         self.ventana.resizable (0,0)
+        self.ventana.overrideredirect(True)
         self.ventana.configure(bg = "lavender")
         centrar_ventana(self.ventana,800,500)
 
         # Codigo del panel verde ubicado en la zona izquierda de la self.ventana 
-
-
+        
         frame_superior = tk.Frame(self.ventana)
         frame_superior.configure(width = 800, height = 50, bg = "palegreen4", bd = 5)
-        frame_superior.place(x = 0, y = 0)
+        frame_superior.pack(fill="x")
+        
+        # Botón de salir
+        imgsSalir = tk.PhotoImage(file='C://Users/Usuario/Documents/inventario/software v1/images/atras.png')
+        self.salir = tk.Button(frame_superior, image=imgsSalir, command=self.toPrincipal, bg="palegreen4", borderwidth=0)
+        self.salir.pack(side="right", padx=10)
 
         entry1 = tk.Entry(self.ventana)
         entry1.config(fg = "gray", bg = "white", font = ("Arial", 12), relief= "raised", width= 50)
@@ -78,28 +75,22 @@ class almacenx():
         boton_añadir2.place(x = 200, y = 400)
         '''
         
-        FrameL = tk.Frame(self.ventana, highlightbackground="black",
-                        highlightthickness=0)
-        self.lista = tk.Listbox(FrameL, background="#FFE7DB",
-                                relief=tk.SOLID, bd=0, selectmode="SINGLE")
-        self.lista.config(font=("Arial", 14),
-                            foreground="#420000", justify="left", selectbackground="red")
-        FrameL.place(relx=0.650, rely=0.250, relwidth=0.650,
-                        relheight=0.585, anchor='n')
-        
-        almacenes = self.RecibirAlmacen()
-        print(almacenes)
-        almacenes = formatear_lineas(almacenes)
-        for almacen in almacenes:
-            self.lista.insert(tk.END, almacen)
-        
-        scrollbar = tk.Scrollbar(FrameL, troughcolor="maroon",
-                                highlightcolor="maroon")
-        scrollbar.pack(side='right', fill='y')
-        self.lista.config(yscrollcommand=scrollbar.set)
-        scrollbar.config(command=self.lista.yview)
+        # Crear la ventana y el treeview
+        tree = ttk.Treeview(self.ventana)
+        tree["columns"] = ("Nombre Almacén", "Ubicación", "Telefono")
+        tree.column("#0", width=100)
+        tree.column("#1", width=100)
+        tree.column("#2", width=100)
+        tree.heading("#0",text="Nombre Almacen")
+        tree.heading("#1", text="Ubicacion")
+        tree.heading("#2", text="Telefono")
+        tree.place(x=260,y=140)
 
-
-
+        # Llenar el treeview con los datos de la base de datos
+        data = self.RecibirAlmacen()
+        print(data)
+        for item in data:
+            tree.insert(parent="", index="end", text=item[0], values=(item[1], item[2]))
+                
         self.ventana.mainloop()
 
