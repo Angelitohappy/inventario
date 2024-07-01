@@ -59,6 +59,10 @@ class verProducto():
         frame_superior.configure(width = 800, height = 50, bg = "palegreen4", bd = 5)
         frame_superior.pack(fill="x")
         
+        frame = tk.Frame(self.ventana)
+        frame.configure(width = 100, height = 50, bg = "palegreen4", bd = 5)
+        frame.place(x=280,y=140)
+        
         # Botón de salir
         imgsSalir = tk.PhotoImage(file='C://Users/Usuario/Documents/inventario/software v1/images/atras.png')
         self.salir = tk.Button(frame_superior, image=imgsSalir, command=self.regresar, bg="palegreen4", borderwidth=0)
@@ -88,22 +92,28 @@ class verProducto():
         boton_añadir2.config(width=50, fg = "white", bg = "medium sea green", font = ("Arial", 14), relief="groove")
         boton_añadir2.place(x = 200, y = 400)
         
+        
+        scrollbar = ttk.Scrollbar(frame)
+        scrollbar.pack(side="right", fill="y")
         # Crear la ventana y el treeview
-        tree = ttk.Treeview(self.ventana)
+        tree = ttk.Treeview(frame,yscrollcommand=scrollbar.set, selectmode="extended")
+        tree.pack()
+        scrollbar.config(command=tree.yview)  
         tree["columns"] = ("Marca", "Tipo Neumático", "Índice Carga", "Índice Velocidad")
-        tree.column("#0", width=100)
-        tree.column("#1", width=100)
-        tree.column("#2", width=100)
-        tree.column("#3", width=100)
-        tree.heading("#0",text="Marca")
-        tree.heading("#1", text="Tipo Neumático")
-        tree.heading("#2", text="Índice Carga")
-        tree.heading("#3", text="Índice Velocidad")
-        tree.place(x=200,y=100)
-
+        tree.column("#0", width=0,stretch=False)
+        tree.column("Marca",anchor="w", width=100)
+        tree.column("Tipo Neumático",anchor="center", width=100)
+        tree.column("Índice Carga", anchor="center",width=100)
+        tree.column("Índice Velocidad",anchor="center", width=100)
+        
+        tree.heading("#0",text="",anchor="w")
+        tree.heading("Marca",text="Marca",anchor="center")
+        tree.heading("Tipo Neumático", text="Tipo Neumático",anchor="center")
+        tree.heading("Índice Carga", text="Índice Carga",anchor="center")
+        tree.heading("Índice Velocidad", text="Índice Velocidad",anchor="center")
         # Llenar el treeview con los datos de la base de datos
         for item in self.Recibirproductos():
-            tree.insert(parent="", index="end", text=item[0], values=(item[1], item[2], item[3]))
-            
+            tree.insert(parent="", index="end", text="", values=(item[0],item[1], item[2], item[3]))
+
         self.ventana.mainloop()
 

@@ -4,6 +4,7 @@ from PIL import Image, ImageTk
 # Creacion y diseño de la self.ventana principal
 from util.generic import centrar_ventana
 import interfaces.VENTANA_PRODUCTOS as rc
+import interfaces.VENTANA_ALMACENES as rc2
 
 
 class admin():
@@ -22,7 +23,7 @@ class admin():
     def toAlmacen(self):
         from interfaces.VENTANA_ALMACENES import verAlmacen
         self.ventana.destroy()
-        verAlmacen()
+        rc2.verAlmacen()
         
     def __init__(self,username): 
         self.ventana = tk.Tk()

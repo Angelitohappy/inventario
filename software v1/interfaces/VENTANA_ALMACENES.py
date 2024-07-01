@@ -43,6 +43,10 @@ class verAlmacen():
         frame_superior.configure(width = 800, height = 50, bg = "palegreen4", bd = 5)
         frame_superior.pack(fill="x")
         
+        frame = tk.Frame(self.ventana)
+        frame.configure(width = 100, height = 50, bg = "palegreen4", bd = 5)
+        frame.place(x=300,y=140)
+        
         # Botón de salir
         imgsSalir = tk.PhotoImage(file='C://Users/Usuario/Documents/inventario/software v1/images/atras.png')
         self.salir = tk.Button(frame_superior, image=imgsSalir, command=self.toPrincipal, bg="palegreen4", borderwidth=0)
@@ -74,23 +78,28 @@ class verAlmacen():
         boton_añadir2.config(width=50, fg = "white", bg = "medium sea green", font = ("Arial", 14), relief="groove")
         boton_añadir2.place(x = 200, y = 400)
         '''
-        
+        scrollbar = ttk.Scrollbar(frame)
+        scrollbar.pack(side="right", fill="y")
         # Crear la ventana y el treeview
-        tree = ttk.Treeview(self.ventana)
-        tree["columns"] = ("Nombre Almacén", "Ubicación", "Telefono")
-        tree.column("#0", width=100)
-        tree.column("#1", width=100)
-        tree.column("#2", width=100)
-        tree.heading("#0",text="Nombre Almacen")
-        tree.heading("#1", text="Ubicacion")
-        tree.heading("#2", text="Telefono")
-        tree.place(x=260,y=140)
+        tree = ttk.Treeview(frame,yscrollcommand=scrollbar.set, selectmode="extended")
+        tree.pack()
+        scrollbar.config(command=tree.yview)  
+        tree["columns"] = ("Nombre Almacen", "Ubicacion", "Telefono")
+        tree.column("#0", width=0,stretch=False)
+        tree.column("Nombre Almacen",anchor="w", width=140)
+        tree.column("Ubicacion",anchor="center", width=100)
+        tree.column("Telefono", anchor="center",width=100)
+        
+        tree.heading("#0",text="",anchor="w")
+        tree.heading("Nombre Almacen",text="Marca",anchor="center")
+        tree.heading("Ubicacion", text="Tipo Neumático",anchor="center")
+        tree.heading("Telefono", text="Índice Carga",anchor="center")
 
         # Llenar el treeview con los datos de la base de datos
         data = self.RecibirAlmacen()
         print(data)
         for item in data:
-            tree.insert(parent="", index="end", text=item[0], values=(item[1], item[2]))
+            tree.insert(parent="", index="end", text="", values=(item[0],item[1], item[2]))
                 
         self.ventana.mainloop()
 
