@@ -113,7 +113,7 @@ class registro():
 
         # Colores
         bg_color = "#EAF6F6" 
-        top_panel_color = "#004A2F"
+        top_panel_color = "palegreen4"
         input_panel_color = "#2F6E4E"
         
         # Fuente
@@ -134,13 +134,8 @@ class registro():
         
         # Botón de salir
         imgRegresar = tk.PhotoImage(file='C://Users/Usuario/Documents/inventario/software v1/images/atras.png')
-        self.btnRegresar = tk.Button(top_frame, image=imgRegresar, command=self.regresar, bg="#004A2F", borderwidth=0)
+        self.btnRegresar = tk.Button(top_frame, image=imgRegresar, command=self.regresar, bg=top_panel_color, borderwidth=0)
         self.btnRegresar.pack(side="right", padx=5)
-        
-        # Botón de minimizar
-        imgsMinimizar = tk.PhotoImage(file='C://Users/Usuario/Documents/inventario/software v1/images/minimizar.png')
-        self.Minimizar = tk.Button(top_frame, image=imgsMinimizar, command=self.minimize_window, bg="#004A2F", borderwidth=0)
-        self.Minimizar.pack(side="right", padx=5)
         
         #Alias
         self.lblAlias=Label(self.pantalla1,text="Alias:",foreground="white",bg="#2F6E4E",font=("Cascadia Mono",11,),justify='left')
@@ -216,7 +211,7 @@ class registro():
         photo_frame = tk.Frame(self.pantalla1, bg="#EAF6F6", width=150, height=150)
         photo_frame.place(x=530, y=100)
 
-        take_photo_button = tk.Button(self.pantalla1, text="Tomar foto", bg="#004A2F", fg="white", font=button_font, command=self.take_photo)
+        take_photo_button = tk.Button(self.pantalla1, text="Tomar foto", bg=top_panel_color, fg="white",relief="groove", font=button_font, command=self.take_photo)
         take_photo_button.place(x=555, y=270)
 
         camera_icon = PhotoImage(file='C://Users/Usuario/Documents/inventario/software v1/images/imagenes-de-usuario.png')  # Ruta al icono de la cámara
@@ -224,7 +219,7 @@ class registro():
         marco.pack()
 
         # Botón de confirmar
-        self.confirm_button = tk.Button(self.pantalla1, text="Confirmar", bg="#004A2F", fg="white", font=button_font, command=self.confirm)
+        self.confirm_button = tk.Button(self.pantalla1, text="Confirmar", bg=top_panel_color, fg="white", relief="groove",font=button_font, command=self.confirm)
         self.confirm_button.place(x=700, y=400)
         
         self.c_v1=IntVar(value=0)

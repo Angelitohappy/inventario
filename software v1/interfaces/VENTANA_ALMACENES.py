@@ -4,19 +4,22 @@ from PIL import Image, ImageTk
 from tkinter import messagebox
 from mysql.connector import Error
 from util.generic import centrar_ventana
+import interfaces.REGISTRO_DE_ALMACEN_VENTANA as rc2
 # Creacion y diseño de la self.ventana principal
 
 class verAlmacen():
     
     def toPrincipal(self):
+        username = self.username 
         from interfaces.VENTANA_PRINCIPAL import admin
         self.ventana.destroy()
-        admin()
+        admin(username)
     
     def toAgregar(self):
+        username = self.username 
         from interfaces.REGISTRO_DE_ALMACEN_VENTANA import almacen
         self.ventana.destroy()
-        almacen()
+        rc2.almacen(username)
         
     def RecibirAlmacen(self):
         try:
@@ -28,7 +31,7 @@ class verAlmacen():
             messagebox.showerror(title="Error de conexión", message=f"No se pudo conectar a la base de idp: {e}")
         return almacen
 
-    def __init__(self):
+    def __init__(self,username):
         self.ventana = tk.Tk()
         self.ventana.title("Registro de producto")
         self.ventana.geometry("600x400")
@@ -38,6 +41,8 @@ class verAlmacen():
         centrar_ventana(self.ventana,800,500)
 
         # Codigo del panel verde ubicado en la zona izquierda de la self.ventana 
+        self.username = username
+        print(self.username)
         
         frame_superior = tk.Frame(self.ventana)
         frame_superior.configure(width = 800, height = 50, bg = "palegreen4", bd = 5)

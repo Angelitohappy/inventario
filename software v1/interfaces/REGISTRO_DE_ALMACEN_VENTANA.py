@@ -6,9 +6,10 @@ from mysql.connector import Error
 class almacen():
     
     def regresar(self):
+        username = self.username 
         from interfaces.VENTANA_ALMACENES import verAlmacen
         self.ventana.destroy()
-        verAlmacen()
+        verAlmacen(username)
         
     def buscar_almacen(self):
         try:
@@ -35,6 +36,7 @@ class almacen():
                 return False
     
     def insert_alamcen(self):
+        username = self.username 
         nombre=self.entrada_almacen.get()
         ubicacion=self.entrada_ubicacion.get()
         nro=self.entrada_nro.get()
@@ -46,11 +48,11 @@ class almacen():
             messagebox.showinfo(title="Aviso!", message="Registro de alacen exitoso!")
             from interfaces.VENTANA_ALMACENES import verAlmacen
             self.ventana.destroy()
-            verAlmacen()
+            verAlmacen(username)
         except Error as e:
             messagebox.showerror(title="Error de conexión", message=f"No se pudo conectar a la base de datos: {e}")
             
-    def __init__(self):
+    def __init__(self,username):
         # Creacion y diseño de la self.ventana principal
         self.ventana = tk.Tk()
         self.ventana.title("Registro de almacen")
@@ -59,6 +61,8 @@ class almacen():
         self.ventana.resizable (0,0)
         self.ventana.configure(bg = "white smoke")
         centrar_ventana(self.ventana,600,400)
+        
+        self.username = username 
         
         frame_superior = tk.Frame(self.ventana)
         frame_superior.configure(width = 800, height = 50, bg = "palegreen4", bd = 5)

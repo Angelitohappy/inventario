@@ -75,16 +75,16 @@ class Acceso:
         label_font = font.Font(family="Helvetica", size=12)
         
         # Marco superior
-        top_frame = tk.Frame(self.pantalla, bg="#004A2F", height=50)
+        top_frame = tk.Frame(self.pantalla, bg="palegreen4", height=50)
         top_frame.pack(fill="x")
         
         # Título de la empresa
-        company_label = tk.Label(top_frame, text="Ruedas La Mundial", bg="#004A2F", fg="white", font=label_font)
+        company_label = tk.Label(top_frame, text="Ruedas La Mundial", bg="palegreen4", fg="white", font=label_font)
         company_label.pack(side="left", padx=10)
         
         # Botón de salir
         imgsSalir = tk.PhotoImage(file='C://Users/Usuario/Documents/inventario/software v1/images/cerrar-sesion.png')
-        self.salir = tk.Button(top_frame, image=imgsSalir, command=self.exit, bg="#004A2F", borderwidth=0)
+        self.salir = tk.Button(top_frame, image=imgsSalir, command=self.exit, bg="palegreen4", borderwidth=0)
         self.salir.pack(side="right", padx=10)
         
         # Marco central
@@ -127,19 +127,19 @@ class Acceso:
         
         # Botón de rostro
         imgBtnface = tk.PhotoImage(file='C://Users/Usuario/Documents/inventario/software v1/images/reconocimiento-facial.png')
-        self.BtnRostro = tk.Button(center_frame, image=imgBtnface, bg="#004A2F", borderwidth=0,command=self.inicio_facial)
+        self.BtnRostro = tk.Button(center_frame, image=imgBtnface, bg="medium sea green", borderwidth=0,command=self.inicio_facial)
         self.BtnRostro.pack(side="right",pady=20)
         
         # Botón de aceptar
-        self.BtnIniciar = tk.Button(center_frame, text="Aceptar",relief="flat",background="#004A2F",foreground="white",command=self.toInventario, borderwidth=0)
+        self.BtnIniciar = tk.Button(center_frame, text="Aceptar",relief="flat",background="medium sea green",foreground="white",command=self.toInventario, borderwidth=0)
         self.BtnIniciar.pack(side="left",pady=20,padx=10,anchor="center")
         
         # Botón de registrio
-        self.BtnRegistrar = tk.Button(center_frame, text="Registar",relief="flat",background="#004A2F",foreground="white",command=self.toRegistro, borderwidth=0)
+        self.BtnRegistrar = tk.Button(center_frame, text="Registar",relief="flat",background="medium sea green",foreground="white",command=self.toRegistro, borderwidth=0)
         self.BtnRegistrar.pack(side="left",pady=20,anchor="center")
         
         # Botón de registrio
-        self.BtnRecuperar = tk.Button(center_frame, text="Recuperar",relief="flat",background="#004A2F",foreground="white",command=self.toRevery, borderwidth=0)
+        self.BtnRecuperar = tk.Button(center_frame, text="Recuperar",relief="flat",background="medium sea green",foreground="white",command=self.toRevery, borderwidth=0)
         self.BtnRecuperar.pack(side="left",pady=20,padx=10,anchor="center")
         
         self.pantalla.mainloop()

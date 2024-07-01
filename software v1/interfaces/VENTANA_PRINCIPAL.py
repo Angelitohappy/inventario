@@ -21,9 +21,10 @@ class admin():
         rc.verProducto(username)
     
     def toAlmacen(self):
+        username=self.username
         from interfaces.VENTANA_ALMACENES import verAlmacen
         self.ventana.destroy()
-        rc2.verAlmacen()
+        rc2.verAlmacen(username)
         
     def __init__(self,username): 
         self.ventana = tk.Tk()
