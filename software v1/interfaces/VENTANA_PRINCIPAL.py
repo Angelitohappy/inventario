@@ -3,6 +3,7 @@ from tkinter import ttk
 from PIL import Image, ImageTk
 # Creacion y diseño de la self.ventana principal
 from util.generic import centrar_ventana
+import interfaces.VENTANA_PRODUCTOS as rc
 
 
 class admin():
@@ -13,16 +14,17 @@ class admin():
         Acceso()
     
     def toArticulo(self):
+        username=self.username
         from interfaces.VENTANA_PRODUCTOS import verProducto
         self.ventana.destroy()
-        verProducto()
+        rc.verProducto(username)
     
     def toAlmacen(self):
         from interfaces.VENTANA_ALMACENES import verAlmacen
         self.ventana.destroy()
         verAlmacen()
         
-    def __init__(self): 
+    def __init__(self,username): 
         self.ventana = tk.Tk()
         self.ventana.title("Registro de producto")
         self.ventana.overrideredirect(True)
@@ -31,7 +33,9 @@ class admin():
         self.ventana.configure(bg = "PaleGreen3")
         centrar_ventana(self.ventana,800,500)
 
-
+        self.username = username
+        print(self.username)
+        
         # Codigo del panel verde ubicado en la zona izquierda de la self.ventana 
 
 

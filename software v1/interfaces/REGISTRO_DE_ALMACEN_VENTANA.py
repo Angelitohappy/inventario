@@ -9,6 +9,30 @@ class almacen():
         from interfaces.VENTANA_ALMACENES import verAlmacen
         self.ventana.destroy()
         verAlmacen()
+        
+    def buscar_almacen(self):
+        try:
+            from database.module_bdd import DatabaseManager
+            db = DatabaseManager()
+            datos = db.read_data_nombreAlmacen()
+            db.close_connection()
+        except Error as e:
+            messagebox.showerror(title="Error de conexión", message=f"No se pudo conectar a la base de datos: {e}") 
+        return datos
+    
+    def comprobar_almacen(self):
+        nombre=self.entrada_almacen.get()
+        datos = self.buscar_almacen()
+        nombres = [fila[0] for fila in datos]
+        for i in nombres:
+            if nombre != i:
+                print(nombre)
+                print(i)
+                return True
+            else:
+                print(nombre)
+                print(i)
+                return False
     
     def insert_alamcen(self):
         nombre=self.entrada_almacen.get()
@@ -19,6 +43,10 @@ class almacen():
             db=DatabaseManager()
             db.insert_data_alamcen(nombre,ubicacion,nro)
             db.close_connection()
+            messagebox.showinfo(title="Aviso!", message="Registro de alacen exitoso!")
+            from interfaces.VENTANA_ALMACENES import verAlmacen
+            self.ventana.destroy()
+            verAlmacen()
         except Error as e:
             messagebox.showerror(title="Error de conexión", message=f"No se pudo conectar a la base de datos: {e}")
             

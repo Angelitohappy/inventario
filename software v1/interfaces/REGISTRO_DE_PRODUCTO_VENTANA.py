@@ -9,47 +9,88 @@ from mysql.connector import Error
 class registrar_producto():
     
     
+    def regresar(self):
+        username = self.username
+        from interfaces.VENTANA_PRODUCTOS import verProducto
+        self.ventana.destroy()
+        verProducto(username)
+    
     def insert_data(self):
-        codigo = ''
         marca = self.entrada_marca.get()
         tipo_neumatico = self.entrada_tipo.get()
         anchura = self.entrada_ancho.get()
         perfil = self.entrada_perfil.get()
         radio = self.entrada_radio.get()
-        indice_carga = self.entrada_IndCarga.get()
-        indice_velocidad = self.entrada_IndVel.get()
+        indice_carga = self.entrada_IndCarga.get()+'kg'
+        indice_velocidad = self.entrada_IndVel.get()+'km/h'
         cantidad = self.entrada_cantidad.get()
+        almacen = self.Almacen.get()
+        username = self.username
+        print(username)
         try:
             from database.module_bdd import DatabaseManager
             db = DatabaseManager()
+            idUsuario=db.read_data_id(username)
+            idAl = db.read_data_idAlmacen(almacen)
+            print(idAl[0])
             db.insert_data_producto(marca,tipo_neumatico,anchura,perfil,radio,indice_carga,indice_velocidad,cantidad)
+            idPro = db.read_data_ultimo_id_producto()
+            print(idPro[0][0])
+            db.insert_data_producto_almacen(str(idPro[0][0]),str(idAl[0]))
+            db.insert_data_registro_insert(str(idUsuario[0]))
             db.close_connection()
+            from interfaces.VENTANA_PRODUCTOS import verProducto
+            self.ventana.destroy()
+            verProducto(username)
             messagebox.showinfo(title="Aviso!", message="Se ha registrado exitosamente!")
         except Error as e:
             messagebox.showerror(title="Error de conexión", message=f"No se pudo conectar a la base de datos: {e}")
+            
+    def buscar_almacen(self):
+        try:
+            from database.module_bdd import DatabaseManager
+            db = DatabaseManager()
+            datos = db.read_data_nombreAlmacen()
+            db.close_connection()
+        except Error as e:
+            messagebox.showerror(title="Error de conexión", message=f"No se pudo conectar a la base de datos: {e}") 
+        return datos
     
-    def __init__(self):
+    def __init__(self,username):
         # Creacion y diseño de la self.ventana principal
         self.ventana = tk.Tk()
         self.ventana.title("Registro de producto")
         self.ventana.geometry("600x400")
+        self.ventana.overrideredirect(True)
         self.ventana.resizable (0,0)
         self.ventana.configure(bg = "white smoke")
         centrar_ventana(self.ventana,800,600)
-
+        
+        self.username = username
+        print(self.username)
+        
+        frame_superior = tk.Frame(self.ventana)
+        frame_superior.configure(width = 800, height = 50, bg = "palegreen4", bd = 5)
+        frame_superior.pack(fill="x")
+        
         # Titulo de la pagina
-        label1 = tk.Label(self.ventana, text = "REGISTRO DE PRODUCTO")
-        label1.config(bg = "white smoke", font = ("Arial", 16, "bold"))
-        label1.place(x = 260 , y = 15)
-
+        label1 = tk.Label(frame_superior, text = "REGISTRO DE PRODUCTO")
+        label1.config(bg = "palegreen4", font = ("Arial", 8, "bold"))
+        label1.place(x = 320 , y = 0)
+        
         # Label que funcionará como el fondo donde estarán ubicadas las  etiquetas 
         frame1 = tk.Frame(self.ventana)
         frame1.configure(width = 750, height = 515, bg = "PaleGreen3", bd = 5)
         frame1.place(x = 25 , y = 50)
 
         frame2 = tk.Frame(self.ventana)
-        frame2.configure(width = 250, height =450, bg = "white smoke", bd = 5)
+        frame2.configure(width = 250, height =475, bg = "white smoke", bd = 5)
         frame2.place(x = 50 , y = 70)
+        
+        # Botón de salir
+        imgsSalir = tk.PhotoImage(file='C://Users/Usuario/Documents/inventario/software v1/images/atras.png')
+        self.salir = tk.Button(frame_superior, image=imgsSalir, command=self.regresar, bg="palegreen4", borderwidth=0)
+        self.salir.pack(side="right", padx=10)
 
         # Botón para confirmar el envio de los datos
         s = ttk.Style()
@@ -60,16 +101,18 @@ class registrar_producto():
             anchor="w"
         )
         
-        boton = ttk.Button(self.ventana, text = "Enviar datos", style = "BotonEnviar.TButton")
+        boton = ttk.Button(self.ventana, text = "Enviar datos", style = "BotonEnviar.TButton",command=self.insert_data)
         boton.place(x = 650, y = 500)
         
         label = tk.Label(self.ventana, text = "Almacen")
         label.config(bg = "white smoke", font = ("Arial", 12))
-        label.place(x = 75 , y = 490)
+        label.place(x = 75 , y = 480)
 
-        self.Almacen=ttk.Combobox(self.ventana,width=10, height=5 ,values=['prueba'], state="readonly", font = ("Arial", 12))
+        datos = self.buscar_almacen()
+        self.Almacen=ttk.Combobox(self.ventana,width=20, height=5 ,values=['prueba'], state="readonly", font = ("Arial", 12))
+        self.Almacen["values"] = [fila[0] for fila in datos]
         self.Almacen.current(0)
-        self.Almacen.place(x = 160, y = 490)
+        self.Almacen.place(x = 75, y = 510)
         
         
         label1 = tk.Label(self.ventana, text = "Marca")

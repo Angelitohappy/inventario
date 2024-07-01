@@ -3,7 +3,7 @@ from tkinter import font
 from tkinter import messagebox
 from mysql.connector import Error
 from util.generic import centrar_ventana
-
+import interfaces.VENTANA_PRINCIPAL as rc
 
 import sys
 
@@ -50,9 +50,8 @@ class Acceso:
             if self.VerifyEntry():
                 if user_exists:
                     messagebox.showinfo(title="Acceso", message="Inicio de sesión exitoso.")
-                    from interfaces.VENTANA_PRINCIPAL import admin
                     self.pantalla.destroy()
-                    admin()
+                    rc.admin(username)
                     
                 else:
                     messagebox.showwarning(title="Error", message="Nombre de usuario o contraseña incorrectos.")
