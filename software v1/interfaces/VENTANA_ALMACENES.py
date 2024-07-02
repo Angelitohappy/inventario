@@ -28,11 +28,10 @@ class verAlmacen():
                 from database.module_bdd import DatabaseManager
                 db = DatabaseManager()
                 self.marca = db.read_data_Almacen_buscador(value)
-                print(self.marca)    
                 db.close_connection()
             except Error as e:
                 messagebox.showerror(title="Error de conexión", message=f"No se pudo conectar a la base de idp: {e}")
-            return True
+            return self.marca
         else:
             return False
         
@@ -45,6 +44,11 @@ class verAlmacen():
         except Error as e:
             messagebox.showerror(title="Error de conexión", message=f"No se pudo conectar a la base de idp: {e}")
         return almacen
+    
+    def remove(self):
+        x = self.tree.selection()
+        for records in x:
+            self.tree.delete(records)
 
     def __init__(self,username):
         self.ventana = tk.Tk()
@@ -94,7 +98,7 @@ class verAlmacen():
         boton_modif.place(x = 20, y = 200)
 
         boton_del = tk.Button(self.ventana, text = "Eliminar almacen")
-        boton_del.config(width=13, fg = "white", bg = "medium sea green", font = ("Arial", 14), relief="groove")
+        boton_del.config(width=13, fg = "white", bg = "medium sea green", font = ("Arial", 14), relief="groove",command=self.remove)
         boton_del.place(x = 20, y = 260)
 
         '''
@@ -105,30 +109,30 @@ class verAlmacen():
         scrollbar = ttk.Scrollbar(frame)
         scrollbar.pack(side="right", fill="y")
         # Crear la ventana y el treeview
-        tree = ttk.Treeview(frame,yscrollcommand=scrollbar.set, selectmode="extended")
-        tree.pack()
-        scrollbar.config(command=tree.yview)  
-        tree["columns"] = ("Nombre Almacen", "Ubicacion", "Telefono")
-        tree.column("#0", width=0,stretch=False)
-        tree.column("Nombre Almacen",anchor="w", width=140)
-        tree.column("Ubicacion",anchor="center", width=100)
-        tree.column("Telefono", anchor="center",width=100)
+        self.tree = ttk.Treeview(frame,yscrollcommand=scrollbar.set, selectmode="extended")
+        self.tree.pack()
+        scrollbar.config(command=self.tree.yview)  
+        self.tree["columns"] = ("Nombre Almacen", "Ubicacion", "Telefono")
+        self.tree.column("#0", width=0,stretch=False)
+        self.tree.column("Nombre Almacen",anchor="w", width=140)
+        self.tree.column("Telefono", anchor="center",width=100)
         
-        tree.heading("#0",text="",anchor="w")
-        tree.heading("Nombre Almacen",text="Marca",anchor="center")
-        tree.heading("Ubicacion", text="Tipo Neumático",anchor="center")
-        tree.heading("Telefono", text="Índice Carga",anchor="center")
+        self.tree.heading("#0",text="",anchor="w")
+        self.tree.heading("Nombre Almacen",text="Marca",anchor="center")
+        self.tree.heading("Ubicacion", text="Tipo Neumático",anchor="center")
+        self.tree.heading("Telefono", text="Índice Carga",anchor="center")
 
         # Llenar el treeview con los datos de la base de datos
         data1 = self.RecibirAlmacen()
-        data2 = self.buscador()
+        
         print(data1)
         if data1:
             for item in data1:
-                tree.insert(parent="", index="end", text="", values=(item[0],item[1], item[2]))
-        elif data2:
-            for item in self.marca:
-                tree.insert(parent="", index="end", text="", values=(item[0],item[1], item[2]))    
+                self.tree.insert(parent="", index="end", text="", values=(item[0],item[1], item[2]))
+        elif self.buscador():
+            #self.tree.destroy()
+            for item in self.buscador:
+                self.tree.insert(parent="", index="end", text="", values=(item[0],item[1], item[2])) 
         
                 
         self.ventana.mainloop()

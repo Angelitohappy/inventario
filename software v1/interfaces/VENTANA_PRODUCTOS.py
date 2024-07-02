@@ -40,6 +40,12 @@ class verProducto():
         except Error as e:
             messagebox.showerror(title="Error de conexión", message=f"No se pudo conectar a la base de idp: {e}")
         return datos
+    
+    def remove(self):
+        x = self.tree.selection()
+        for records in x:
+            self.tree.delete(records)
+        
         
     def __init__(self,username):
         self.ventana = tk.Tk()
@@ -85,7 +91,7 @@ class verProducto():
         boton_cerrar.place(x = 50, y = 200)
 
         boton_cerrar = tk.Button(self.ventana, text = "Eliminar articulo")
-        boton_cerrar.config(width=12, fg = "white", bg = "medium sea green", font = ("Arial", 14), relief="groove")
+        boton_cerrar.config(width=12, fg = "white", bg = "medium sea green", font = ("Arial", 14), relief="groove",command=self.remove)
         boton_cerrar.place(x = 50, y = 260)
 
         boton_añadir2 = tk.Button(self.ventana, text = "Añadir nuevo almacen")
@@ -96,24 +102,25 @@ class verProducto():
         scrollbar = ttk.Scrollbar(frame)
         scrollbar.pack(side="right", fill="y")
         # Crear la ventana y el treeview
-        tree = ttk.Treeview(frame,yscrollcommand=scrollbar.set, selectmode="extended")
-        tree.pack()
-        scrollbar.config(command=tree.yview)  
-        tree["columns"] = ("Marca", "Tipo Neumático", "Índice Carga", "Índice Velocidad")
-        tree.column("#0", width=0,stretch=False)
-        tree.column("Marca",anchor="w", width=100)
-        tree.column("Tipo Neumático",anchor="center", width=100)
-        tree.column("Índice Carga", anchor="center",width=100)
-        tree.column("Índice Velocidad",anchor="center", width=100)
+        self.tree = ttk.Treeview(frame,yscrollcommand=scrollbar.set, selectmode="extended")
+        self.tree.pack()
+        scrollbar.config(command=self.tree.yview)  
+        self.tree["columns"] = ("Marca", "Tipo Neumático", "Índice Carga", "Índice Velocidad")
+        self.tree.column("#0", width=0,stretch=False)
+        self.tree.column("Marca",anchor="w", width=100)
+        self.tree.column("Tipo Neumático",anchor="center", width=100)
+        self.tree.column("Índice Carga", anchor="center",width=100)
+        self.tree.column("Índice Velocidad",anchor="center", width=100)
         
-        tree.heading("#0",text="",anchor="w")
-        tree.heading("Marca",text="Marca",anchor="center")
-        tree.heading("Tipo Neumático", text="Tipo Neumático",anchor="center")
-        tree.heading("Índice Carga", text="Índice Carga",anchor="center")
-        tree.heading("Índice Velocidad", text="Índice Velocidad",anchor="center")
+        self.tree.heading("#0",text="",anchor="w")
+        self.tree.heading("Marca",text="Marca",anchor="center")
+        self.tree.heading("Tipo Neumático", text="Tipo Neumático",anchor="center")
+        self.tree.heading("Índice Carga", text="Índice Carga",anchor="center")
+        self.tree.heading("Índice Velocidad", text="Índice Velocidad",anchor="center")
+        
         # Llenar el treeview con los datos de la base de datos
         for item in self.Recibirproductos():
-            tree.insert(parent="", index="end", text="", values=(item[0],item[1], item[2], item[3]))
+            self.tree.insert(parent="", index="end", text="", values=(item[0],item[1], item[2], item[3]))
 
         self.ventana.mainloop()
 
