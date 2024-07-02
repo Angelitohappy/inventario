@@ -210,9 +210,11 @@ class registro():
         # Panel de foto
         photo_frame = tk.Frame(self.pantalla1, bg="#EAF6F6", width=150, height=150)
         photo_frame.place(x=530, y=100)
-
+        '''
         take_photo_button = tk.Button(self.pantalla1, text="Tomar foto", bg=top_panel_color, fg="white",relief="groove", font=button_font, command=self.take_photo)
         take_photo_button.place(x=555, y=270)
+        '''
+        
 
         camera_icon = PhotoImage(file='C://Users/Usuario/Documents/inventario/software v1/images/imagenes-de-usuario.png')  # Ruta al icono de la cámara
         marco = Label(photo_frame, image=camera_icon, bg=bg_color)

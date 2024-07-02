@@ -80,7 +80,7 @@ class DatabaseManager:
     #SELECT * FROM clientes WHERE nombre LIKE '%a%' or nombre LIKE '%r%' ;
     def read_data_Almacen_buscador(self,value):
         almacen = []
-        self.cursor.execute("SELECT nombre_almacen,ubicacion,nro_almacen FROM almacen where nombre_almacen like %s", ('%'+value+'%'))
+        self.cursor.execute(f"SELECT nombre_almacen, ubicacion, nro_almacen FROM almacen WHERE nombre_almacen LIKE '%{value}%' ")
         almacen = self.cursor.fetchall()
         return almacen
     

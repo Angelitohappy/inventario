@@ -23,14 +23,18 @@ class verAlmacen():
         
     def buscador(self):
         value = self.entry1.get()
-        try:
-            from database.module_bdd import DatabaseManager
-            db = DatabaseManager()
-            almacen = db.read_data_Almacen_buscador(value)    
-            db.close_connection()
-        except Error as e:
-            messagebox.showerror(title="Error de conexión", message=f"No se pudo conectar a la base de idp: {e}")
-        return almacen
+        if len(value)>0:
+            try:
+                from database.module_bdd import DatabaseManager
+                db = DatabaseManager()
+                self.marca = db.read_data_Almacen_buscador(value)
+                print(self.marca)    
+                db.close_connection()
+            except Error as e:
+                messagebox.showerror(title="Error de conexión", message=f"No se pudo conectar a la base de idp: {e}")
+            return True
+        else:
+            return False
         
     def RecibirAlmacen(self):
         try:
@@ -68,16 +72,16 @@ class verAlmacen():
         self.salir = tk.Button(frame_superior, image=imgsSalir, command=self.toPrincipal, bg="palegreen4", borderwidth=0)
         self.salir.pack(side="right", padx=10)
         
-        '''
+        
         buscar=tk.StringVar()
         self.entry1 = tk.Entry(self.ventana,textvariable=buscar)
         self.entry1.config(fg = "gray", bg = "white", font = ("Arial", 12), relief= "raised", width= 50)
         self.entry1.place(x = 261,y = 100)
         imgBuscar = tk.PhotoImage(file='C://Users/Usuario/Documents/inventario/software v1/images/buscar (1).png')
-        boton_buscar = tk.Button(self.ventana, image=imgBuscar,command=self.toAgregar)
+        boton_buscar = tk.Button(self.ventana, image=imgBuscar,command=self.buscador)
         boton_buscar.config(bg = "medium sea green", relief="groove")
         boton_buscar.place(x = 715, y = 100)
-        '''
+        
         
 
 
@@ -117,16 +121,14 @@ class verAlmacen():
 
         # Llenar el treeview con los datos de la base de datos
         data1 = self.RecibirAlmacen()
-        #data2 = self.buscador()
+        data2 = self.buscador()
         print(data1)
         if data1:
             for item in data1:
                 tree.insert(parent="", index="end", text="", values=(item[0],item[1], item[2]))
-        '''
         elif data2:
-            for item in data2:
-                tree.insert(parent="", index="end", text="", values=(item[0],item[1], item[2]))
-        '''        
+            for item in self.marca:
+                tree.insert(parent="", index="end", text="", values=(item[0],item[1], item[2]))    
         
                 
         self.ventana.mainloop()

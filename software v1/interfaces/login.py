@@ -124,11 +124,13 @@ class Acceso:
         self.c1 = tk.Checkbutton(center_frame,text='Mostrar contraseña', variable=self.c_v1,onvalue=1,offvalue=0,command=self.my_show)
         self.c1.pack(side="bottom")
         
-        
+        '''
         # Botón de rostro
         imgBtnface = tk.PhotoImage(file='C://Users/Usuario/Documents/inventario/software v1/images/reconocimiento-facial.png')
         self.BtnRostro = tk.Button(center_frame, image=imgBtnface, bg="medium sea green", borderwidth=0,command=self.inicio_facial)
         self.BtnRostro.pack(side="right",pady=20)
+        '''
+        
         
         # Botón de aceptar
         self.BtnIniciar = tk.Button(center_frame, text="Aceptar",relief="flat",background="medium sea green",foreground="white",command=self.toInventario, borderwidth=0)
