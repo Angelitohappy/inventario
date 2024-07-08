@@ -15,15 +15,20 @@ class DatabaseManager:
     def insert_data_registro_insert(self,idUsuario):
         query = "INSERT INTO registro_acceso(tipo_movimiento,timeStamp,id_usuario_registro) VALUES ('Agregar Producto', now(),'"+idUsuario+"')"
         self.cursor.execute(query)
-        self.conn.commit()    
+        self.conn.commit()
+        
+    def insert_data_registro_move(self,idUsuario):
+        query = "INSERT INTO registro_acceso(tipo_movimiento,timeStamp,id_usuario_registro) VALUES ('Movimiento', now(),'"+idUsuario+"')"
+        self.cursor.execute(query)
+        self.conn.commit()  
     
     def insert_data_producto_almacen(self,idPro,idAl):
         query = "INSERT INTO producto_almacen(idPro,idAl) VALUES ('"+idPro+"','"+idAl+"')"
         self.cursor.execute(query)
         self.conn.commit()
 
-    def insert_data_producto(self,marca,tipo_neumatico,anchura,perfil,radio,indice_carga,indice_velocidad,cantidad):
-        query = "INSERT INTO producto(marca,tipo_neumatico,anchura,perfil,radio,indice_carga,indice_velocidad,cantidad) VALUES ('"+marca+"','"+tipo_neumatico+"','"+anchura+"','"+perfil+"','"+radio+"','"+indice_carga+"','"+indice_velocidad+"','"+cantidad+"')"
+    def insert_data_producto(self,marca,tipo_neumatico,anchura,perfil,radio,indice_carga,indice_velocidad,cod):
+        query = "INSERT INTO producto(marca,tipo_neumatico,anchura,perfil,radio,indice_carga,indice_velocidad,codigo) VALUES ('"+marca+"','"+tipo_neumatico+"','"+anchura+"','"+perfil+"','"+radio+"','"+indice_carga+"','"+indice_velocidad+"','"+cod+"')"
         self.cursor.execute(query)
         self.conn.commit()
         
@@ -46,9 +51,9 @@ class DatabaseManager:
         producto_almacen = self.cursor.fetchall()
         return producto_almacen
     
-    def read_data_movimiento(self,value):
+    def read_data_movimiento(self):
         producto_almacen = []
-        query = "SELECT producto.codigo ,producto.marca, a.nrombre_almacen, a.ubicacion from producto join producto_almacen on IdProducto = idPro join almacen on idAlmacen = idAl"
+        query = "SELECT producto.codigo ,producto.marca, almacen.nombre_almacen, almacen.ubicacion from producto join producto_almacen on IdProducto = idPro join almacen on idAlmacen = idAl"
         self.cursor.execute(query)
         producto_almacen = self.cursor.fetchall()
         return producto_almacen
@@ -68,6 +73,11 @@ class DatabaseManager:
         self.cursor.execute(query)
         return self.cursor.fetchone()
     
+    def read_data_codProducto(self):
+        query = "SELECT codigo FROM producto"
+        self.cursor.execute(query)
+        return self.cursor.fetchall()
+    
     def read_data_nombreAlmacen(self):
         query = "SELECT nombre_almacen FROM almacen"
         self.cursor.execute(query)
@@ -75,6 +85,11 @@ class DatabaseManager:
     
     def read_data_ultimo_id_producto(self):
         query = "SELECT MAX(idProducto) FROM producto"
+        self.cursor.execute(query)
+        return self.cursor.fetchall()
+    
+    def read_data_ultimo_idMovimiento(self):
+        query = "SELECT MAX(idMovimiento) FROM producto_almacen"
         self.cursor.execute(query)
         return self.cursor.fetchall()
     
@@ -96,6 +111,11 @@ class DatabaseManager:
         self.cursor.execute(query)
         return self.cursor.fetchone()
     
+    def read_data_idProducto(self, cod):
+        query = "SELECT idProducto FROM producto WHERE codigo = '"+cod+"'"
+        self.cursor.execute(query)
+        return self.cursor.fetchone()
+    
     def read_data_email(self, username):
         query = "SELECT correo FROM usuario WHERE username = '"+username+"'"
         self.cursor.execute(query)
@@ -109,6 +129,11 @@ class DatabaseManager:
     #Update
     def update_data_clave(self,clave1,username):
         query = "UPDATE usuario SET clave = '"+clave1+"' WHERE username = '"+username+"' "
+        self.cursor.execute(query)
+        self.conn.commit()
+    
+    def update_data_producto_almacen(self,idPro,idAl):
+        query = "UPDATE producto_almacen SET idAl = '"+idAl+"' WHERE idPro = '"+idPro+"' "
         self.cursor.execute(query)
         self.conn.commit()
 

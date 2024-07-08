@@ -4,7 +4,7 @@ from PIL import Image, ImageTk
 from tkinter import messagebox
 from mysql.connector import Error
 from util.generic import centrar_ventana
-import interfaces.REGISTRO_DE_ALMACEN_VENTANA as rc2
+import interfaces.cambio_almacen as rc3
 
 
 class verMovimientos():
@@ -15,11 +15,11 @@ class verMovimientos():
         self.ventana.destroy()
         admin(username)
     
-    def toAgregar(self):
+    def toCambiar(self):
         username = self.username 
-        from interfaces.REGISTRO_DE_ALMACEN_VENTANA import almacen
+        from interfaces.cambio_almacen import cambiar_almacen
         self.ventana.destroy()
-        rc2.almacen(username)
+        rc3.cambiar_almacen(username)
         
     def buscador(self):
         value = self.entry1.get()
@@ -57,7 +57,7 @@ class verMovimientos():
         self.ventana.resizable (0,0)
         self.ventana.overrideredirect(True)
         self.ventana.configure(bg = "lavender")
-        centrar_ventana(self.ventana,800,500)
+        centrar_ventana(self.ventana,700,400)
 
         self.username = username
         print(self.username)
@@ -68,27 +68,16 @@ class verMovimientos():
         
         frame = tk.Frame(self.ventana)
         frame.configure(width = 100, height = 50, bg = "palegreen4", bd = 5)
-        frame.place(x=300,y=140)
+        frame.place(x=120,y=60)
         
         # Botón de salir
         imgsSalir = tk.PhotoImage(file='C://Users/Usuario/Documents/inventario/software v1/images/atras.png')
         self.salir = tk.Button(frame_superior, image=imgsSalir, command=self.toPrincipal, bg="palegreen4", borderwidth=0)
         self.salir.pack(side="right", padx=10)
         
-        
-        buscar=tk.StringVar()
-        self.entry1 = tk.Entry(self.ventana,textvariable=buscar)
-        self.entry1.config(fg = "gray", bg = "white", font = ("Arial", 12), relief= "raised", width= 50)
-        self.entry1.place(x = 261,y = 100)
-        imgBuscar = tk.PhotoImage(file='C://Users/Usuario/Documents/inventario/software v1/images/buscar (1).png')
-        boton_buscar = tk.Button(self.ventana, image=imgBuscar,command=self.buscador)
-        boton_buscar.config(bg = "medium sea green", relief="groove")
-        boton_buscar.place(x = 715, y = 100)
-        
-    
         boton_añadir2 = tk.Button(self.ventana, text = "Cambiar almacen")
-        boton_añadir2.config(width=50, fg = "white", bg = "medium sea green", font = ("Arial", 14), relief="groove")
-        boton_añadir2.place(x = 200, y = 400)
+        boton_añadir2.config(width=50, fg = "white", bg = "medium sea green", font = ("Arial", 14), relief="groove",command=self.toCambiar)
+        boton_añadir2.place(x = 70, y = 300)
 
         scrollbar = ttk.Scrollbar(frame)
         scrollbar.pack(side="right", fill="y")

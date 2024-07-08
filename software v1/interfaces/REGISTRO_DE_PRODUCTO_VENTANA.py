@@ -23,7 +23,7 @@ class registrar_producto():
         radio = self.entrada_radio.get()
         indice_carga = self.entrada_IndCarga.get()+'kg'
         indice_velocidad = self.entrada_IndVel.get()+'km/h'
-        cantidad = self.entrada_cantidad.get()
+        cod = self.entrada_cantidad.get()
         almacen = self.Almacen.get()
         username = self.username
         print(username)
@@ -33,7 +33,7 @@ class registrar_producto():
             idUsuario=db.read_data_id(username)
             idAl = db.read_data_idAlmacen(almacen)
             print(idAl[0])
-            db.insert_data_producto(marca,tipo_neumatico,anchura,perfil,radio,indice_carga,indice_velocidad,cantidad)
+            db.insert_data_producto(marca,tipo_neumatico,anchura,perfil,radio,indice_carga,indice_velocidad,cod.upper())
             idPro = db.read_data_ultimo_id_producto()
             print(idPro[0][0])
             db.insert_data_producto_almacen(str(idPro[0][0]),str(idAl[0]))
@@ -157,12 +157,11 @@ class registrar_producto():
 
         # Esta linea crea la etiqueta donde se va a introducir la cantidad
 
-        label5 = tk.Label(self.ventana, text = "Cantidad")
+        label5 = tk.Label(self.ventana, text = "Codigo")
         label5.config(bg = "white smoke", font = ("Arial", 12))
         label5.place(x = 75 , y = 425) 
         self.cantidad = tk.StringVar()
         self.entrada_cantidad = tk.Entry(self.ventana,fg = "gray", bg = "white", font = ("Arial", 12), width = 10,textvariable=self.cantidad)
-        self.entrada_cantidad.config(validate='key',validatecommand=(self.entrada_cantidad.register(Verify_cedula), '%S'))
         self.entrada_cantidad.place(x = 75,y = 450) 
 
         # Esta linea crea la etiqueta donde se va a introducir el radio del neumatico

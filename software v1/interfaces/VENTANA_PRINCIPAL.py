@@ -5,6 +5,7 @@ from PIL import Image, ImageTk
 from util.generic import centrar_ventana
 import interfaces.VENTANA_PRODUCTOS as rc
 import interfaces.VENTANA_ALMACENES as rc2
+import interfaces.movimiento as rc3
 
 
 class admin():
@@ -25,6 +26,12 @@ class admin():
         from interfaces.VENTANA_ALMACENES import verAlmacen
         self.ventana.destroy()
         rc2.verAlmacen(username)
+    
+    def toMovimiento(self):
+        username=self.username
+        from interfaces.movimiento import verMovimientos
+        self.ventana.destroy()
+        rc3.verMovimientos(username)
         
     def __init__(self,username): 
         self.ventana = tk.Tk()
@@ -58,23 +65,25 @@ class admin():
         self.salir = tk.Button(frame_superior, image=imgsSalir, command=self.regresar, bg="palegreen4", borderwidth=0)
         self.salir.pack(side="right", padx=10)
 
-        boton_cerrar = tk.Button(self.ventana, text = "Ver articulos", command=self.toArticulo)
-        boton_cerrar.config(width=18, fg = "white", bg = "medium sea green", font = ("Arial", 18), relief="groove")
-        boton_cerrar.place(x = 430, y = 100)
+        boton_articulo = tk.Button(self.ventana, text = "Ver articulos", command=self.toArticulo)
+        boton_articulo.config(width=18, fg = "white", bg = "medium sea green", font = ("Arial", 18), relief="groove")
+        boton_articulo.place(x = 430, y = 100)
 
-        boton_cerrar = tk.Button(self.ventana, text = "Ver almacenes")
-        boton_cerrar.config(width=18, fg = "white", bg = "medium sea green", font = ("Arial", 18), relief="groove",command=self.toAlmacen)
-        boton_cerrar.place(x = 430, y = 160)
+        boton_almacen = tk.Button(self.ventana, text = "Ver almacenes")
+        boton_almacen.config(width=18, fg = "white", bg = "medium sea green", font = ("Arial", 18), relief="groove",command=self.toAlmacen)
+        boton_almacen.place(x = 430, y = 160)
+        
+        boton_movimiento = tk.Button(self.ventana, text = "Movimientos")
+        boton_movimiento.config(width=18, fg = "white", bg = "medium sea green", font = ("Arial", 18), relief="groove",command=self.toMovimiento)
+        boton_movimiento.place(x = 430, y = 220)
 
         boton_cerrar = tk.Button(self.ventana, text = "Reportes")
         boton_cerrar.config(width=18, fg = "white", bg = "medium sea green", font = ("Arial", 18), relief="groove")
-        boton_cerrar.place(x = 430, y = 220)
+        boton_cerrar.place(x = 430, y = 280)
 
         boton_cerrar = tk.Button(self.ventana, text = "Usuarios")
         boton_cerrar.config(width=18, fg = "white", bg = "medium sea green", font = ("Arial", 18), relief="groove")
-        boton_cerrar.place(x = 430, y = 280)
-
-        ## Botones de la parte inferior izquierda
+        boton_cerrar.place(x = 430, y = 340)
 
         # Boton para acceder a las opciones de la cuenta
         boton_cuenta = tk.Button(self.ventana, text = "Cuenta de usuario")
