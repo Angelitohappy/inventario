@@ -20,7 +20,12 @@ class DatabaseManager:
     def insert_data_registro_move(self,idUsuario):
         query = "INSERT INTO registro_acceso(tipo_movimiento,timeStamp,id_usuario_registro) VALUES ('Movimiento', now(),'"+idUsuario+"')"
         self.cursor.execute(query)
-        self.conn.commit()  
+        self.conn.commit()
+        
+    def insert_data_registro_edit(self,idUsuario):
+        query = "INSERT INTO registro_acceso(tipo_movimiento,timeStamp,id_usuario_registro) VALUES ('Modificar Producto', now(),'"+idUsuario+"')"
+        self.cursor.execute(query)
+        self.conn.commit() 
     
     def insert_data_producto_almacen(self,idPro,idAl):
         query = "INSERT INTO producto_almacen(idPro,idAl) VALUES ('"+idPro+"','"+idAl+"')"
@@ -134,6 +139,11 @@ class DatabaseManager:
     
     def update_data_producto_almacen(self,idPro,idAl):
         query = "UPDATE producto_almacen SET idAl = '"+idAl+"' WHERE idPro = '"+idPro+"' "
+        self.cursor.execute(query)
+        self.conn.commit()
+        
+    def update_data_producto(self,marca,tipo_neumatico,anchura,perfil,radio,indice_carga,indice_velocidad,cod):
+        query = "UPDATE producto SET marca = '"+marca+"',tipo_neumatico = '"+tipo_neumatico+"',anchura = '"+anchura+"',perfil = '"+perfil+"',radio = '"+radio+"',indice_carga = '"+indice_carga+"',indice_velocidad = '"+indice_velocidad+"' WHERE idProducto = '"+cod+"' "
         self.cursor.execute(query)
         self.conn.commit()
 

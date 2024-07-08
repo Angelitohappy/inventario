@@ -5,6 +5,7 @@ from tkinter import messagebox
 from mysql.connector import Error
 from util.generic import centrar_ventana
 import interfaces.REGISTRO_DE_PRODUCTO_VENTANA as rc
+import interfaces.editar_producto as rc4
 
 class verProducto():
     
@@ -19,6 +20,12 @@ class verProducto():
         from interfaces.REGISTRO_DE_PRODUCTO_VENTANA import registrar_producto
         self.ventana.destroy()
         rc.registrar_producto(username)
+    
+    def toEditar(self):
+        username = self.username
+        from interfaces.editar_producto import edit_producto
+        self.ventana.destroy()
+        rc4.edit_producto(username)
         
     def buscador(self):
         value = self.entry1.get()
@@ -86,7 +93,7 @@ class verProducto():
         boton_cerrar.config(width=12, fg = "white", bg = "medium sea green", font = ("Arial", 14), relief="groove")
         boton_cerrar.place(x = 50, y = 140)
 
-        boton_cerrar = tk.Button(self.ventana, text = "Modificar articulo")
+        boton_cerrar = tk.Button(self.ventana, text = "Modificar articulo",command=self.toEditar)
         boton_cerrar.config(width=12, fg = "white", bg = "medium sea green", font = ("Arial", 14), relief="groove")
         boton_cerrar.place(x = 50, y = 200)
 
