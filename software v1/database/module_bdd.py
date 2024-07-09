@@ -25,6 +25,11 @@ class DatabaseManager:
     def insert_data_registro_edit(self,idUsuario):
         query = "INSERT INTO registro_acceso(tipo_movimiento,timeStamp,id_usuario_registro) VALUES ('Modificar Producto', now(),'"+idUsuario+"')"
         self.cursor.execute(query)
+        self.conn.commit()
+        
+    def insert_data_registro_editAl(self,idUsuario):
+        query = "INSERT INTO registro_acceso(tipo_movimiento,timeStamp,id_usuario_registro) VALUES ('Modificar Producto', now(),'"+idUsuario+"')"
+        self.cursor.execute(query)
         self.conn.commit() 
     
     def insert_data_producto_almacen(self,idPro,idAl):
@@ -83,6 +88,11 @@ class DatabaseManager:
         self.cursor.execute(query)
         return self.cursor.fetchall()
     
+    def read_data_cod_almacen(self):
+        query = "SELECT cod_almacen FROM almacen"
+        self.cursor.execute(query)
+        return self.cursor.fetchall()
+    
     def read_data_nombreAlmacen(self):
         query = "SELECT nombre_almacen FROM almacen"
         self.cursor.execute(query)
@@ -111,8 +121,8 @@ class DatabaseManager:
         almacen = self.cursor.fetchall()
         return almacen
     
-    def read_data_idAlmacen(self, almacen):
-        query = "SELECT idAlmacen FROM almacen WHERE nombre_almacen = '"+almacen+"'"
+    def read_data_idAlmacen(self, cod):
+        query = "SELECT idAlmacen FROM almacen WHERE cod_almacen = '"+cod+"'"
         self.cursor.execute(query)
         return self.cursor.fetchone()
     
@@ -139,6 +149,11 @@ class DatabaseManager:
     
     def update_data_producto_almacen(self,idPro,idAl):
         query = "UPDATE producto_almacen SET idAl = '"+idAl+"' WHERE idPro = '"+idPro+"' "
+        self.cursor.execute(query)
+        self.conn.commit()
+        
+    def update_data_almacen(self,nombre,ubicacion,nro,idAlmacen):
+        query = "UPDATE almacen SET nombre_almacen = '"+nombre+"', ubicacion= '"+ubicacion+"', nro_almacen= '"+nro+"' WHERE idAlmacen = '"+idAlmacen+"' "
         self.cursor.execute(query)
         self.conn.commit()
         

@@ -50,7 +50,7 @@ class registrar_producto():
         try:
             from database.module_bdd import DatabaseManager
             db = DatabaseManager()
-            datos = db.read_data_nombreAlmacen()
+            datos = db.read_data_cod_almacen()
             db.close_connection()
         except Error as e:
             messagebox.showerror(title="Error de conexión", message=f"No se pudo conectar a la base de datos: {e}") 

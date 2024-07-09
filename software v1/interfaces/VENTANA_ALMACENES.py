@@ -5,9 +5,16 @@ from tkinter import messagebox
 from mysql.connector import Error
 from util.generic import centrar_ventana
 import interfaces.REGISTRO_DE_ALMACEN_VENTANA as rc2
+import interfaces.editar_almacen as rc4
 # Creacion y diseño de la self.ventana principal
 
 class verAlmacen():
+    
+    def toEdit(self):
+        username = self.username 
+        from interfaces.editar_almacen import edit_alamacen
+        self.ventana.destroy()
+        rc4.edit_alamacen(username)
     
     def toPrincipal(self):
         username = self.username 
@@ -94,7 +101,7 @@ class verAlmacen():
         boton_añadir.place(x = 20, y = 140)
 
         boton_modif = tk.Button(self.ventana, text = "Modificar almacen")
-        boton_modif.config(width=13, fg = "white", bg = "medium sea green", font = ("Arial", 14), relief="groove")
+        boton_modif.config(width=13, fg = "white", bg = "medium sea green", font = ("Arial", 14), relief="groove",command=self.toEdit)
         boton_modif.place(x = 20, y = 200)
 
         boton_del = tk.Button(self.ventana, text = "Eliminar almacen")
