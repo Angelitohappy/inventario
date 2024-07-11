@@ -80,7 +80,7 @@ class verProducto():
         imgsSalir = tk.PhotoImage(file='C://Users/Usuario/Documents/inventario/software v1/images/atras.png')
         self.salir = tk.Button(frame_superior, image=imgsSalir, command=self.regresar, bg="palegreen4", borderwidth=0)
         self.salir.pack(side="right", padx=10)
-
+        '''
         self.entry1 = tk.Entry(self.ventana)
         self.entry1.config(fg = "gray", bg = "white", font = ("Arial", 12), relief= "raised", width= 50)
         self.entry1.place(x = 260,y = 70)
@@ -88,7 +88,7 @@ class verProducto():
         boton_buscar = tk.Button(self.ventana, image=imgBuscar,command=self.buscador)
         boton_buscar.config(bg = "medium sea green", relief="groove")
         boton_buscar.place(x = 715, y = 71)
-
+        '''
         boton_cerrar = tk.Button(self.ventana, text = "Añadir articulo",command=self.toAgregar)
         boton_cerrar.config(width=12, fg = "white", bg = "medium sea green", font = ("Arial", 14), relief="groove")
         boton_cerrar.place(x = 50, y = 140)

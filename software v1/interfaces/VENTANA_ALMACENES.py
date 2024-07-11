@@ -82,8 +82,7 @@ class verAlmacen():
         imgsSalir = tk.PhotoImage(file='C://Users/Usuario/Documents/inventario/software v1/images/atras.png')
         self.salir = tk.Button(frame_superior, image=imgsSalir, command=self.toPrincipal, bg="palegreen4", borderwidth=0)
         self.salir.pack(side="right", padx=10)
-        
-        
+        '''
         buscar=tk.StringVar()
         self.entry1 = tk.Entry(self.ventana,textvariable=buscar)
         self.entry1.config(fg = "gray", bg = "white", font = ("Arial", 12), relief= "raised", width= 50)
@@ -92,10 +91,7 @@ class verAlmacen():
         boton_buscar = tk.Button(self.ventana, image=imgBuscar,command=self.buscador)
         boton_buscar.config(bg = "medium sea green", relief="groove")
         boton_buscar.place(x = 715, y = 100)
-        
-        
-
-
+        '''
         boton_añadir = tk.Button(self.ventana, text = "Añadir almacen")
         boton_añadir.config(width=13, fg = "white", bg = "medium sea green", font = ("Arial", 14), relief="groove",command=self.toAgregar)
         boton_añadir.place(x = 20, y = 140)
