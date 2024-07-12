@@ -20,30 +20,18 @@ class almacen():
         except Error as e:
             messagebox.showerror(title="Error de conexión", message=f"No se pudo conectar a la base de datos: {e}") 
         return datos
-    
-    def comprobar_almacen(self):
-        nombre=self.entrada_almacen.get()
-        datos = self.buscar_almacen()
-        nombres = [fila[0] for fila in datos]
-        for i in nombres:
-            if nombre != i:
-                print(nombre)
-                print(i)
-                return True
-            else:
-                print(nombre)
-                print(i)
-                return False
+
     
     def insert_alamcen(self):
         username = self.username 
         nombre=self.entrada_almacen.get()
         ubicacion=self.entrada_ubicacion.get()
         nro=self.entrada_nro.get()
+        cod = self.codigo.get()
         try:
             from database.module_bdd import DatabaseManager
             db=DatabaseManager()
-            db.insert_data_alamcen(nombre,ubicacion,nro)
+            db.insert_data_alamcen(nombre,ubicacion,nro,cod)
             db.close_connection()
             messagebox.showinfo(title="Aviso!", message="Registro de alacen exitoso!")
             from interfaces.VENTANA_ALMACENES import verAlmacen
@@ -92,7 +80,7 @@ class almacen():
 
         boton = tk.Button(self.ventana, text = "Enviar datos")
         boton.config(fg = "white", bg = "green", font = ("Arial", 12),command=self.insert_alamcen)
-        boton.place(x = 250, y = 250)
+        boton.place(x = 250, y = 330)
 
         # Esta linea crea la etiqueta donde se va a introducir el ID del almacen
 
@@ -124,5 +112,13 @@ class almacen():
         self.entrada_nro = tk.Entry(self.ventana)
         self.entrada_nro.config(fg = "gray", bg = "white", font = ("Arial", 12))
         self.entrada_nro.place(x = 220 ,y = 210)
+        
+        label3 = tk.Label(self.ventana, text = "Codigo")
+        label3.config(bg = "white smoke", font = ("Arial", 12))
+        label3.place(x = 220 , y = 235)
+        
+        self.codigo = tk.Entry(self.ventana)
+        self.codigo.config(fg = "gray", bg = "white", font = ("Arial", 12))
+        self.codigo.place(x = 220 ,y = 255)
 
         self.ventana.mainloop()

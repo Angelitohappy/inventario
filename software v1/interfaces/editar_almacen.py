@@ -32,7 +32,8 @@ class edit_alamacen():
             from database.module_bdd import DatabaseManager
             db=DatabaseManager()
             idUsuario = db.read_data_id(username)
-            db.update_data_almacen(nombre=nombre,ubicacion=ubicacion,nro=nro,idAlmacen=cod)
+            idAlmacen = db.read_data_idAlmacen(cod=cod)
+            db.update_data_almacen(nombre=nombre,ubicacion=ubicacion,nro=nro,idAlmacen=str(idAlmacen[0]))
             db.insert_data_registro_editAl(str(idUsuario[0]))
             db.close_connection()
             messagebox.showinfo(title="Aviso!", message="Modificacion exitosa!")
@@ -120,7 +121,7 @@ class edit_alamacen():
         label.place(x = 220 , y = 460)
 
         datos = self.buscar_almacen()
-        self.Almacen=ttk.Combobox(self.ventana,width=20, height=5 ,values=['prueba'], state="readonly", font = ("Arial", 12))
+        self.Almacen=ttk.Combobox(self.ventana,width=20, height=5 ,values=[''], state="readonly", font = ("Arial", 12))
         self.Almacen["values"] = [fila[0] for fila in datos]
         self.Almacen.current(0)
         self.Almacen.place(x = 220, y = 285)

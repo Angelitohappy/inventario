@@ -28,7 +28,7 @@ class DatabaseManager:
         self.conn.commit()
         
     def insert_data_registro_editAl(self,idUsuario):
-        query = "INSERT INTO registro_acceso(tipo_movimiento,timeStamp,id_usuario_registro) VALUES ('Modificar Producto', now(),'"+idUsuario+"')"
+        query = "INSERT INTO registro_acceso(tipo_movimiento,timeStamp,id_usuario_registro) VALUES ('Modificar Almacen', now(),'"+idUsuario+"')"
         self.cursor.execute(query)
         self.conn.commit() 
     
@@ -42,8 +42,8 @@ class DatabaseManager:
         self.cursor.execute(query)
         self.conn.commit()
         
-    def insert_data_alamcen(self,nombre,ubicacion,nro):
-        query = "INSERT INTO almacen(nombre_almacen,ubicacion,nro_almacen) VALUES ('"+nombre+"','"+ubicacion+"','"+nro+"')"
+    def insert_data_alamcen(self,nombre,ubicacion,nro,cod):
+        query = "INSERT INTO almacen(cod_almacen,nombre_almacen,ubicacion,nro_almacen) VALUES ('"+cod+"','"+nombre+"','"+ubicacion+"','"+nro+"')"
         self.cursor.execute(query)
         self.conn.commit()
         

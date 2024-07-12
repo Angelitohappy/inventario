@@ -11,7 +11,7 @@ import interfaces.editar_almacen as rc4
 class verAlmacen():
     
     def toEdit(self):
-        username = self.username 
+        username = self.username
         from interfaces.editar_almacen import edit_alamacen
         self.ventana.destroy()
         rc4.edit_alamacen(username)
@@ -23,12 +23,13 @@ class verAlmacen():
         admin(username)
     
     def toAgregar(self):
-        username = self.username 
+        username = self.username
         from interfaces.REGISTRO_DE_ALMACEN_VENTANA import almacen
         self.ventana.destroy()
         rc2.almacen(username)
         
-    def buscador(self):
+        '''
+            def buscador(self):
         value = self.entry1.get()
         if len(value)>0:
             try:
@@ -41,6 +42,8 @@ class verAlmacen():
             return self.marca
         else:
             return False
+        '''
+
         
     def RecibirAlmacen(self):
         try:
@@ -82,6 +85,7 @@ class verAlmacen():
         imgsSalir = tk.PhotoImage(file='C://Users/Usuario/Documents/inventario/software v1/images/atras.png')
         self.salir = tk.Button(frame_superior, image=imgsSalir, command=self.toPrincipal, bg="palegreen4", borderwidth=0)
         self.salir.pack(side="right", padx=10)
+        
         '''
         buscar=tk.StringVar()
         self.entry1 = tk.Entry(self.ventana,textvariable=buscar)
@@ -92,6 +96,7 @@ class verAlmacen():
         boton_buscar.config(bg = "medium sea green", relief="groove")
         boton_buscar.place(x = 715, y = 100)
         '''
+        
         boton_añadir = tk.Button(self.ventana, text = "Añadir almacen")
         boton_añadir.config(width=13, fg = "white", bg = "medium sea green", font = ("Arial", 14), relief="groove",command=self.toAgregar)
         boton_añadir.place(x = 20, y = 140)
@@ -118,10 +123,11 @@ class verAlmacen():
         self.tree["columns"] = ("Nombre Almacen", "Ubicacion", "Telefono")
         self.tree.column("#0", width=0,stretch=False)
         self.tree.column("Nombre Almacen",anchor="w", width=140)
+        self.tree.column("Ubicacion", anchor="center",width=100)
         self.tree.column("Telefono", anchor="center",width=100)
         
         self.tree.heading("#0",text="",anchor="w")
-        self.tree.heading("Nombre Almacen",text="Marca",anchor="center")
+        self.tree.heading("Nombre Almacen",text="Marca",anchor="w")
         self.tree.heading("Ubicacion", text="Tipo Neumático",anchor="center")
         self.tree.heading("Telefono", text="Índice Carga",anchor="center")
 
@@ -132,10 +138,6 @@ class verAlmacen():
         if data1:
             for item in data1:
                 self.tree.insert(parent="", index="end", text="", values=(item[0],item[1], item[2]))
-        elif self.buscador():
-            #self.tree.destroy()
-            for item in self.buscador:
-                self.tree.insert(parent="", index="end", text="", values=(item[0],item[1], item[2])) 
         
                 
         self.ventana.mainloop()
