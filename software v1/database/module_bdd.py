@@ -67,6 +67,13 @@ class DatabaseManager:
         self.cursor.execute(query)
         producto_almacen = self.cursor.fetchall()
         return producto_almacen
+    
+    def read_data_movimiento_usuario(self):
+        producto_almacen = []
+        query = "SELECT usuario.nombre, usuario.username, registro_acceso.tipo_movimiento,registro_acceso.timeStamp from usuario JOIN registro_acceso on usuario.idUsuario =  registro_acceso.Id_usuario_registro"
+        self.cursor.execute(query)
+        producto_almacen = self.cursor.fetchall()
+        return producto_almacen
         
     def read_data_producto(self):
         query = "SELECT codigo,marca,tipo_neumatico,anchura,perfil,radio,indice_carga,indice_velocidad FROM producto"

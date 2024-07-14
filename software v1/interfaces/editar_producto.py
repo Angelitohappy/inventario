@@ -100,7 +100,7 @@ class edit_producto():
         boton = ttk.Button(self.ventana, text = "Enviar datos", style = "BotonEnviar.TButton",command=self.insert_data)
         boton.place(x = 650, y = 500)
         
-        label = tk.Label(self.ventana, text = "Almacen")
+        label = tk.Label(self.ventana, text = "Codigo")
         label.config(bg = "white smoke", font = ("Arial", 12))
         label.place(x = 75 , y = 480)
 

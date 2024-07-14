@@ -127,9 +127,9 @@ class verAlmacen():
         self.tree.column("Telefono", anchor="center",width=100)
         
         self.tree.heading("#0",text="",anchor="w")
-        self.tree.heading("Nombre Almacen",text="Marca",anchor="w")
-        self.tree.heading("Ubicacion", text="Tipo Neumático",anchor="center")
-        self.tree.heading("Telefono", text="Índice Carga",anchor="center")
+        self.tree.heading("Nombre Almacen",text="Nombre Almacen",anchor="w")
+        self.tree.heading("Ubicacion", text="Ubicacion",anchor="center")
+        self.tree.heading("Telefono", text="Telefono",anchor="center")
 
         # Llenar el treeview con los datos de la base de datos
         data1 = self.RecibirAlmacen()

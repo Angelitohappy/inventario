@@ -107,13 +107,19 @@ class registrar_producto():
         label = tk.Label(self.ventana, text = "Almacen")
         label.config(bg = "white smoke", font = ("Arial", 12))
         label.place(x = 75 , y = 480)
-
-        datos = self.buscar_almacen()
-        self.Almacen=ttk.Combobox(self.ventana,width=20, height=5 ,values=['prueba'], state="readonly", font = ("Arial", 12))
-        self.Almacen["values"] = [fila[0] for fila in datos]
-        self.Almacen.current(0)
-        self.Almacen.place(x = 75, y = 510)
         
+        datos = self.buscar_almacen()
+        if datos:
+            self.Almacen=ttk.Combobox(self.ventana,width=20, height=5 ,values=['prueba'], state="readonly", font = ("Arial", 12))
+            self.Almacen["values"] = [fila[0] for fila in datos]
+            self.Almacen.current(0)
+            self.Almacen.place(x = 75, y = 510)
+        else:
+            messagebox.showwarning(title="Aviso!", message="Debe Registrar primero un almacen!")
+            username = self.username
+            from interfaces.VENTANA_PRODUCTOS import verProducto
+            self.ventana.destroy()
+            verProducto(username)
         
         label1 = tk.Label(self.ventana, text = "Marca")
         label1.config(bg = "white smoke", font = ("Arial", 12))

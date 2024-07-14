@@ -6,6 +6,7 @@ from util.generic import centrar_ventana
 import interfaces.VENTANA_PRODUCTOS as rc
 import interfaces.VENTANA_ALMACENES as rc2
 import interfaces.movimiento as rc3
+import interfaces.VENTANA_USUARIOS as rc4
 
 
 class admin():
@@ -14,6 +15,12 @@ class admin():
         from interfaces.login import Acceso
         self.ventana.destroy()
         Acceso()
+    
+    def toUsuario(self):
+        username=self.username
+        from interfaces.VENTANA_USUARIOS import verUsuarios
+        self.ventana.destroy()
+        rc4.verUsuarios(username)
     
     def toArticulo(self):
         username=self.username
@@ -82,7 +89,7 @@ class admin():
         boton_cerrar.place(x = 430, y = 280)
 
         boton_cerrar = tk.Button(self.ventana, text = "Usuarios")
-        boton_cerrar.config(width=18, fg = "white", bg = "medium sea green", font = ("Arial", 18), relief="groove")
+        boton_cerrar.config(width=18, fg = "white", bg = "medium sea green", font = ("Arial", 18), relief="groove",command=self.toUsuario)
         boton_cerrar.place(x = 430, y = 340)
 
         # Boton para acceder a las opciones de la cuenta
